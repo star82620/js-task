@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>0629 JS forEach 資料整理 課後練習題</title>
+  </head>
+  <body>
+    請開 devTool
+    <script src="./hw-js-0629-kh-data.js"></script>
+    <script>
+      console.log(data[0]);
+
+      // Q1:高雄有幾個里長
+      let khPeople = 0;
+      data.forEach((item) => (khPeople += 1));
+
+      // Q2: 性別比例：
+      // 找找看如果現在的物件中已經有這個值，就＋1；沒有的話就 item=1
+      let sex = {};
+      data.forEach((item) => {
+        if (sex[item.性別] >= 1) {
+          sex[item.性別] += 1;
+        } else {
+          sex[item.性別] = 1;
+        }
+      });
+
+      // Q3:黨派比例
+      let party = {};
+      data.forEach((item) => {
+        if (party[item.黨籍] >= 1) {
+          party[item.黨籍] += 1;
+        } else {
+          party[item.黨籍] = 1;
+        }
+      });
+
+      // Q4:各區里長數
+      let total = [];
+      data.forEach((item) => {
+        let index = total.findIndex((areaItem) => areaItem.area === item.區別);
+
+        if (index === -1) {
+          total.push({ area: item.區別, people: 1 });
+        } else {
+          total[index].people += 1;
+        }
+      });
+
+      let answer = {
+        高雄有幾位里長: khPeople,
+        里長的性別比例: sex,
+        黨派比例: party,
+        各區里長數: total,
+      };
+
+      console.log(answer);
+
+      // const hehe = [];
+      // data.forEach((item, index) => {
+      //   let obj = {};
+      //   // obj.area = item.區別;
+      //   hehe.forEach((a, b) => {
+      //     // console.log(a.area)
+      //     if (a.area != item.區別) {
+      //       obj.people = 1;
+      //     } else {
+      //       obj.people = 2;
+      //     }
+      //     console.log(obj);
+      //     hehe.push(obj);
+      //   });
+      //   console.log(obj);
+      // });
+    </script>
+  </body>
+</html>
